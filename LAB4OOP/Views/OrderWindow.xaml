@@ -1,0 +1,97 @@
+﻿<Window x:Class="LAB4OOP.Views.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:models="clr-namespace:LAB4OOP.Models"
+        xmlns:local="clr-namespace:LAB4OOP.Views"
+        mc:Ignorable="d"
+        Height="515" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+    <materialDesign:Card UniformCornerRadius="15">
+        <materialDesign:Card.Resources>
+            <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="#f9fafb" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="BorderBrush" Value="#ddd" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#888" BlurRadius="8" ShadowDepth="2" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стилі текстових блоків та полів вводу -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,5,0,2" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#333" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+     
+        <ObjectDataProvider x:Key="ServiceTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}" >
+              <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="models:EducationLevel" />
+              </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </materialDesign:Card.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" >
+        <Border Style="{StaticResource CardStyle}" MouseDown="Border_MouseDown">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="0.9,1">
+                    <GradientStop Color="#c7ffed" Offset="0" />
+                    <GradientStop Color="#c7e8ff" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+                <StackPanel>
+                    <TextBlock Text="Створення / Редагування " FontSize="20" FontWeight="Bold" Margin="0,0,0,15" />
+
+                <TextBlock Text="Ім'я Студента:" />
+                <TextBox x:Name="FirstNameBox"  />
+
+                <TextBlock Text="Прізвище Студента:" />
+                <TextBox x:Name="LastNameBox"  />
+
+                <TextBlock Text="Дата народження:" />
+                <DatePicker x:Name="BirthDatePicker" Margin="0,0,0,10" />
+
+                <TextBlock Text="Освітній рівень:" />
+                <ComboBox x:Name="ServiceCombo" ItemsSource="{Binding Source={StaticResource ServiceTypes}}" />
+
+                <TextBlock Text="Іспит:" />
+                <TextBox x:Name="AddressBox" />
+
+                <TextBlock Text="Оцінка:" />
+                <TextBox x:Name="CostBox"  />
+
+                <TextBlock Text="Дата іспиту:" />
+                <DatePicker x:Name="DateBox"  />
+
+                <TextBlock Text="Середній бал:" />
+                <TextBox x:Name="SeredBox"  />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Зберегти" Width="100"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
+                            Height="25" Margin="0 0 15 0" Click="Save_Click"/>
+                    <Button Content="Скасувати" Width="100"  Background="#f44336" BorderBrush="#f44336" Foreground="Black" Style="{StaticResource MaterialDesignFlatButton}"
+                            Height="25" Click="Cancel_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+    </materialDesign:Card>
+</Window>
