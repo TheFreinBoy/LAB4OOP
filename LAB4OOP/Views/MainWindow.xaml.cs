@@ -25,21 +25,38 @@ namespace LAB4OOP.Views
     public partial class MainWindow : Window
     {
         private readonly IStudentService _studentService = new StudentService();
+        private readonly ExamService _examService;
         public MainWindow()
         {
             InitializeComponent();
-            LoadStudentsToGrid();
-
+            LoadStudentsToGrid();           
+            _examService = new ExamService();          
         }
         private void LoadStudentsToGrid()
         {
-            var students = _studentService.GetAllStudents();
+            
+            var students = _studentService.GetAllStudents();          
             OrdersGrid.ItemsSource = students;
+        }
+
+        private void Border_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                try
+                {
+                    DragMove();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Помилка: " + ex.Message);
+                }
+            }
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var orderWindow = new OrderWindow();
+            var orderWindow = new OrderWindow(_examService);
 
             if (orderWindow.ShowDialog() == true)
             {

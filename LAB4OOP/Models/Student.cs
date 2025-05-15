@@ -21,14 +21,15 @@ namespace LAB4OOP.Models
 
         public Person Person => person;
         public EducationLevel EducationLevel => educationLevel;
-        public List<Exam> Exams => exams;
+        
 
         public void AddExam(Exam exam)
         {
             exams.Add(exam);
         }
 
-        public double AverageScore => exams.Any() ? exams.Average(e => e.Score) : 0.0;
+        public double AverageScore { get; set; }
+
 
         public override string ToString()
         {
@@ -41,10 +42,13 @@ namespace LAB4OOP.Models
         }
 
         public string FullName => person.FullName;
-        public string ExamName => exams.LastOrDefault()?.Name ?? "";
-        public double? ExamScore => exams.LastOrDefault()?.Score;
-        public DateTime? ExamDate => exams.LastOrDefault()?.Date;
+        public string ExamName => exams.LastOrDefault().Name;
+        public double ExamScore => exams.LastOrDefault().Score;
+        public DateTime ExamDate => exams.LastOrDefault().Date;
         public int Id {  get; set; }
+        public int ExamId { get; set; }
+        public double Score { get; set; }
+        
     }
 
 }

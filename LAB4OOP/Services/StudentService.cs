@@ -3,20 +3,45 @@ using LAB4OOP.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LAB4OOP.Services
 {
     public class StudentService : IStudentService
     {
-
         private static readonly DatabaseHelper _dbHelper = new DatabaseHelper();
+        private Dictionary<int, Exam> GetAllExamsDict()
+        {
+            var exams = new Dictionary<int, Exam>();
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                connection.Open();
+                string query = "SELECT * FROM Exams";
+
+                using (var cmd = new SQLiteCommand(query, connection))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var exam = new Exam(
+                            reader["Name"].ToString(),
+                            DateTime.Parse(reader["Date"].ToString())
+                        )
+                        {
+                            Id = Convert.ToInt32(reader["Id"])                           
+                        };
+                        exams[exam.Id] = exam;
+                    }
+                }
+            }
+
+            return exams;
+        }
 
         public List<Student> GetAllStudents()
         {
             var students = new List<Student>();
+            var exams = GetAllExamsDict();
 
             using (var connection = _dbHelper.GetConnection())
             {
@@ -39,8 +64,16 @@ namespace LAB4OOP.Services
                             (EducationLevel)Enum.Parse(typeof(EducationLevel), reader["EducationLevel"].ToString())
                         )
                         {
-                            Id = Convert.ToInt32(reader["Id"])
+                            Id = Convert.ToInt32(reader["Id"]),
+                            ExamId = Convert.ToInt32(reader["ExamId"]),
+                            Score = Convert.ToDouble(reader["Score"]),
+                            AverageScore = Convert.ToDouble(reader["AverageScore"])
                         };
+
+                        if (exams.ContainsKey(student.ExamId))
+                        {
+                            student.AddExam(exams[student.ExamId]);
+                        }
 
                         students.Add(student);
                     }
@@ -50,19 +83,26 @@ namespace LAB4OOP.Services
             return students;
         }
 
+
         public void AddStudent(Student student)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO Students (FirstName, LastName, BirthDate, EducationLevel) VALUES (@FirstName, @LastName, @BirthDate, @EducationLevel)";
+                string query = @"INSERT INTO Students 
+                                (FirstName, LastName, BirthDate, EducationLevel, ExamId, Score, AverageScore) 
+                                VALUES 
+                                (@FirstName, @LastName, @BirthDate, @EducationLevel, @ExamId, @Score, @AverageScore)";
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@FirstName", student.Person.FirstName);
                     cmd.Parameters.AddWithValue("@LastName", student.Person.LastName);
-                    cmd.Parameters.AddWithValue("@BirthDate", student.Person.BirthDate);
+                    cmd.Parameters.AddWithValue("@BirthDate", student.Person.BirthDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@EducationLevel", student.EducationLevel.ToString());
+                    cmd.Parameters.AddWithValue("@ExamId", student.ExamId);
+                    cmd.Parameters.AddWithValue("@Score", student.Score);
+                    cmd.Parameters.AddWithValue("@AverageScore", student.AverageScore);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -74,14 +114,25 @@ namespace LAB4OOP.Services
             using (var connection = _dbHelper.GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE Students SET FirstName = @FirstName, LastName = @LastName, BirthDate = @BirthDate, EducationLevel = @EducationLevel WHERE Id = @Id";
+                string query = @"UPDATE Students SET 
+                                    FirstName = @FirstName, 
+                                    LastName = @LastName, 
+                                    BirthDate = @BirthDate, 
+                                    EducationLevel = @EducationLevel,
+                                    ExamId = @ExamId,
+                                    Score = @Score,
+                                    AverageScore = @AverageScore
+                                WHERE Id = @Id";
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@FirstName", student.Person.FirstName);
                     cmd.Parameters.AddWithValue("@LastName", student.Person.LastName);
-                    cmd.Parameters.AddWithValue("@BirthDate", student.Person.BirthDate);
+                    cmd.Parameters.AddWithValue("@BirthDate", student.Person.BirthDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@EducationLevel", student.EducationLevel.ToString());
+                    cmd.Parameters.AddWithValue("@ExamId", student.ExamId);
+                    cmd.Parameters.AddWithValue("@Score", student.Score);
+                    cmd.Parameters.AddWithValue("@AverageScore", student.AverageScore);
                     cmd.Parameters.AddWithValue("@Id", student.Id);
 
                     cmd.ExecuteNonQuery();
@@ -104,5 +155,4 @@ namespace LAB4OOP.Services
             }
         }
     }
-
 }

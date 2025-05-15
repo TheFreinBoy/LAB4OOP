@@ -8,19 +8,18 @@ namespace LAB4OOP.Models
 {
     public class Exam
     {
-        private string name;
-        private double score;
-        private DateTime date;
+        public int Id { get; set; }
 
-        public Exam(string name, double score, DateTime date)
+        public string Name { get; set; }
+        public double Score { get; set; }
+        public DateTime Date { get; set; }
+
+        public Exam() { }
+
+        public Exam(string name, DateTime date)
         {
-            this.name = name;
-            this.score = score;
-            this.date = date;
+            Name = name;            
+            Date = date;
         }
-
-        public string Name => name;
-        public double Score => score;
-        public DateTime Date => date;
     }
 }

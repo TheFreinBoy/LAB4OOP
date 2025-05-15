@@ -8,17 +8,14 @@
         xmlns:models="clr-namespace:LAB4OOP.Models"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Height="515" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Height="515" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <materialDesign:Card UniformCornerRadius="15">
+    <materialDesign:Card UniformCornerRadius="15" Background="Transparent">
         <materialDesign:Card.Resources>
             <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Background" Value="#f9fafb" />
-            <Setter Property="Padding" Value="15" />
-            <Setter Property="BorderBrush" Value="#ddd" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Margin" Value="10" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="1" />
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect Color="#888" BlurRadius="8" ShadowDepth="2" />
@@ -26,7 +23,6 @@
             </Setter>
         </Style>
 
-        <!-- Стилі текстових блоків та полів вводу -->
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="0,5,0,2" />
             <Setter Property="FontSize" Value="14" />
@@ -34,12 +30,19 @@
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="140"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            
      
         <ObjectDataProvider x:Key="ServiceTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}" >
               <ObjectDataProvider.MethodParameters>
@@ -56,42 +59,53 @@
                     <GradientStop Color="#c7e8ff" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Width" Value="160"/>
+                            <Setter Property="Height" Value="28"/>
+                            <Setter Property="CornerRadius" Value="15"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="0 10 0 0"/>
+                        </Style>
+                    </Grid.Resources>
+                    <StackPanel>
+                        <TextBlock Text="Створення / Редагування " FontSize="20" FontWeight="Bold" Margin="0,0,0,15" />
+                        <TextBlock Text="Ім'я Студента:" />
+                        <Border>
+                            <TextBox x:Name="FirstNameBox"  />
+                        </Border>
+                        <TextBlock Text="Прізвище Студента:" />
+                        <Border>
+                            <TextBox x:Name="LastNameBox"  />
+                        </Border>
+                        <TextBlock Text="Дата народження:" />
+                        <Border>
+                            <DatePicker x:Name="BirthDatePicker" Margin="0,0,0,10" BorderThickness="0" Height="25" Width="140"/>
+                        </Border>
+                        <TextBlock Text="Освітній рівень:" />
+                        <Border>
+                            <ComboBox x:Name="ServiceCombo" ItemsSource="{Binding Source={StaticResource ServiceTypes}}" />
+                        </Border>
+                        <TextBlock Text="Іспит:" />
+                        <ComboBox x:Name="ExamComboBox" DisplayMemberPath="Name" SelectionChanged="ExamComboBox_SelectionChanged" />
 
-                <StackPanel>
-                    <TextBlock Text="Створення / Редагування " FontSize="20" FontWeight="Bold" Margin="0,0,0,15" />
+                        <TextBlock Text="Оцінка:" />
+                        <TextBox x:Name="CostBox"  />
 
-                <TextBlock Text="Ім'я Студента:" />
-                <TextBox x:Name="FirstNameBox"  />
+                        <TextBlock Text="Середній бал:" />
+                        <TextBox x:Name="SeredBox"  />
 
-                <TextBlock Text="Прізвище Студента:" />
-                <TextBox x:Name="LastNameBox"  />
-
-                <TextBlock Text="Дата народження:" />
-                <DatePicker x:Name="BirthDatePicker" Margin="0,0,0,10" />
-
-                <TextBlock Text="Освітній рівень:" />
-                <ComboBox x:Name="ServiceCombo" ItemsSource="{Binding Source={StaticResource ServiceTypes}}" />
-
-                <TextBlock Text="Іспит:" />
-                <TextBox x:Name="AddressBox" />
-
-                <TextBlock Text="Оцінка:" />
-                <TextBox x:Name="CostBox"  />
-
-                <TextBlock Text="Дата іспиту:" />
-                <DatePicker x:Name="DateBox"  />
-
-                <TextBlock Text="Середній бал:" />
-                <TextBox x:Name="SeredBox"  />
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <Button Content="Зберегти" Width="100"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
-                            Height="25" Margin="0 0 15 0" Click="Save_Click"/>
-                    <Button Content="Скасувати" Width="100"  Background="#f44336" BorderBrush="#f44336" Foreground="Black" Style="{StaticResource MaterialDesignFlatButton}"
-                            Height="25" Click="Cancel_Click" />
-                </StackPanel>
-            </StackPanel>
-        </Border>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="Зберегти" Width="100"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
+                Height="25" Margin="0 0 15 0" Click="Save_Click"/>
+                            <Button Content="Скасувати" Width="100"  Background="#f44336" BorderBrush="#f44336" Foreground="Black" Style="{StaticResource MaterialDesignFlatButton}"
+                Height="25" Click="Cancel_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
     </ScrollViewer>
     </materialDesign:Card>
 </Window>

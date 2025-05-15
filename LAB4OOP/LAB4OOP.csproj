@@ -87,11 +87,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DatabaseHelper.cs" />
+    <Compile Include="Services\ExamService.cs" />
     <Compile Include="Services\IstudentService.cs" />
     <Compile Include="Services\StudentService.cs" />
+    <Compile Include="Views\CreateExamWindow.xaml.cs">
+      <DependentUpon>CreateExamWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CreateExamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
