@@ -7,12 +7,12 @@
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
         Height="250" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
-    <Grid>
+    <Grid Mouse.MouseMove="Border_MouseDown">
         <Border CornerRadius="15">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="0.9,1">
-                    <GradientStop Color="#c7ffed" Offset="0" />
-                    <GradientStop Color="#c7e8ff" Offset="1" />
+                    <GradientStop Color="#00ffff" Offset="0" />
+                    <GradientStop Color="#106ada" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
@@ -20,13 +20,13 @@
                     <Style TargetType="TextBlock">
                         <Setter Property="FontSize" Value="20"/>
                         <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Margin" Value="0 60 0 0"/>
-                        
+                        <Setter Property="Margin" Value="0 70 0 0"/>
+                        <Setter Property="Foreground" Value="White"/>
                     </Style>
                     <Style TargetType="TextBox">
                         <Setter Property="FontSize" Value="20"/>
                         <Setter Property="Width" Value="130"/>
-                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="BorderThickness" Value="0"/>
                     </Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="White"/>
@@ -44,6 +44,15 @@
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
+                <Border Width="550" Grid.ColumnSpan="3" Height="160" CornerRadius="85" Margin="0 0 25 0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0.9,0.1" EndPoint="0.9,1">
+                            <GradientStop Color="#000066" Offset="0" />
+                            <GradientStop Color="#ff99cc" Offset="1" />
+
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Назва іспиту" Grid.Column="0"/>
                     <Border Grid.Column="0" >
@@ -65,7 +74,7 @@
                         </Button>
                     </StackPanel>
                     <Button Content="Створити" Width="100"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black" 
-                            materialDesign:ButtonAssist.CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 44 0 0" Click="SaveButton_Click"/>
+                            materialDesign:ButtonAssist.CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 54 0 0" Click="SaveButton_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

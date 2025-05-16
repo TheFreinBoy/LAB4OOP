@@ -66,6 +66,7 @@ namespace LAB4OOP.Views
                 }
             }
         }
+        private void ButtonExit_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {

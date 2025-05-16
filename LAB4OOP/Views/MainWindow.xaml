@@ -6,171 +6,87 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1100" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Window.Resources>
-
-        <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="25" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Padding" Value="15" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Стилі для DataGrid -->
-        <Style x:Key="StyledDataGrid" TargetType="DataGrid">
-            <Setter Property="RowBackground" Value="#c9ffea" />
-            <Setter Property="AlternatingRowBackground" Value="#c9ffea" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="GridLinesVisibility" Value="Vertical" />
-            <Setter Property="HeadersVisibility" Value="Column" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="VerticalGridLinesBrush" Value="Black" />
-
-        </Style>
-
-        <!-- Стиль заголовків колонок -->
-        <Style x:Key="StyledHeader" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#7ba2ad" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Height" Value="40"/>
-        </Style>
-
-        <Style x:Key="DataGridCellBaseStyle" TargetType="DataGridCell">
-            <Setter Property="Padding" Value="6" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
-            
-        </Style>
-
-
-        <!-- Стиль для клітинок: розділювач між стовпцями -->
-        <Style x:Key="DataGridCellSeparatorStyle" TargetType="DataGridCell">
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
-        </Style>
-
-        <!-- Стиль для виділеного та наведення на рядок -->
-        <Style TargetType="DataGridRow">
-            
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Height" Value="35"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#c7e8ff" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#c9ffea" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Стиль для кнопок -->
-        <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Padding" Value="8,4" />
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="4"
-                                SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              Content="{TemplateBinding Content}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Opacity" Value="0.8" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="RenderTransform">
-                                    <Setter.Value>
-                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
-    <Grid MouseDown="Border_MouseDown">
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                <GradientStop Color="#e3fff6" Offset="1"/>
-                <GradientStop Color="#c7e8ff" Offset="0"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="6.5*" />
-            <RowDefinition Height="1.1*" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0"
-                   Text="Студенти"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="#333"
-                   HorizontalAlignment="Center"
-                   Margin="0,20,0,20" />
-
-        <Border Grid.Row="1" Style="{StaticResource CardStyle}">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="0.9,1">
-                    <GradientStop Color="#c7ffed" Offset="0"/>
-                    <GradientStop Color="#c7e8ff" Offset="1"/>
+        Title="MainWindow" Height="650" Width="1100" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}">
+    
+    <materialDesign:Card MouseDown="Border_MouseDown" UniformCornerRadius="15" >
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                    <GradientStop Color="#e3fff6" Offset="1"/>
+                    <GradientStop Color="#c7e8ff" Offset="0"/>
                 </LinearGradientBrush>
-            </Border.Background>
-            <DataGrid x:Name="OrdersGrid"
-                      CellStyle="{StaticResource DataGridCellSeparatorStyle}"
-                      ColumnHeaderStyle="{StaticResource StyledHeader}"
-                      ItemsSource="{Binding Orders}"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      CanUserAddRows="False"                     
-                      Style="{StaticResource StyledDataGrid}">
-                <DataGrid.Background>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="6.5*" />
+                <RowDefinition Height="1.1*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock  Text="Студенти" FontSize="28" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center" Margin="0,20,0,20" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
+                <StackPanel Width="60" Height="50">
+                    <Button  Margin="10 7 10 0" Height="40" Width="40" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Close" Background="{x:Null}" 
+                            x:Name="ButtonExit" Click="ButtonExit_Click"  BorderBrush="Black">
+                        <materialDesign:PackIcon Kind="Close" Foreground="Black" Height="20" Width="20"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+                <Border.Background>
                     <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="0.9,1">
-                        <GradientStop Color="#c7ffed" Offset="0"/>
-                        <GradientStop Color="#c7e8ff" Offset="1"/>
+                        <GradientStop Color="#FFD6FFC7"/>
+                        <GradientStop Color="#FFDEBEFF" Offset="0.993"/>
+                        <GradientStop Color="#FFA8F2FF" Offset="0.49"/>
                     </LinearGradientBrush>
-                </DataGrid.Background>
+                </Border.Background>
+                <DataGrid CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Style="{DynamicResource DataGridStyle1}" x:Name="OrdersGrid" 
+              IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" EnableColumnVirtualization="True"                     
+              >
+                    <DataGrid.Background>
+                        <LinearGradientBrush EndPoint="0.9,1" StartPoint="0.1,0.1">
+                            <GradientStop Color="#FFD6FFC7"/>
+                            <GradientStop Color="#FFDEBEFF" Offset="0.993"/>
+                            <GradientStop Color="#FFA8F2FF" Offset="0.49"/>
+                        </LinearGradientBrush>
+                    </DataGrid.Background>
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Прізвище, Ім’я" Binding="{Binding FullName}" Width="200"/>
-                    <DataGridTextColumn Header="Дата народження" Binding="{Binding Person.BirthDate, StringFormat=d}" Width="180"/>
-                    <DataGridTextColumn Header="Освітній рівень" Binding="{Binding EducationLevel}" Width="170"/>
-                    <DataGridTextColumn Header="Іспит" Binding="{Binding ExamName}" Width="120"/>
-                    <DataGridTextColumn Header="Оцінка" Binding="{Binding Score}" Width="90"/>
-                    <DataGridTextColumn Header="Дата іспиту" Binding="{Binding ExamDate, StringFormat=d}" Width="130"/>
-                    <DataGridTextColumn Header="Середній бал" Binding="{Binding AverageScore}" Width="150"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Прізвище, Ім’я" Binding="{Binding FullName}" Width="180"/>
+                        <DataGridTextColumn Header="Дата народження" Binding="{Binding Person.BirthDate, StringFormat=d}" Width="*"/>
+                        <DataGridTextColumn Header="Освітній рівень" Binding="{Binding EducationLevel}" Width="*"/>
+                        <DataGridTextColumn Header="Іспит" Binding="{Binding ExamName}" Width="*"/>
+                        <DataGridTextColumn Header="Оцінка" Binding="{Binding Score}" Width="*"/>
+                        <DataGridTextColumn Header="Дата іспиту" Binding="{Binding ExamDate, StringFormat=d}" Width="*"/>
+                        <DataGridTextColumn Header="Середній бал" Binding="{Binding AverageScore}" Width="*"/>
+                        
+                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButton}">
+                                            <materialDesign:PackIcon Kind="PencilOffOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                            <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>  
+                        </DataGridTemplateColumn>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15,10">
-            <Button x:Name="AddButton" Content="Додати" Width="120" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa"
-                    Height="45" materialDesign:ButtonAssist.CornerRadius="15" Foreground="Black" FontSize="16" Click="Add_Click"/>
-            <Button x:Name="EditButton" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
-                    Content="Редагувати" Width="120" IsEnabled="False" Height="45" materialDesign:ButtonAssist.CornerRadius="15" Margin="10 0 0 0" FontSize="16"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15,10">
+                <Button x:Name="AddButton" Content="Додати" Width="120" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa"
+            Height="45" materialDesign:ButtonAssist.CornerRadius="15" Foreground="Black" FontSize="16" Click="Add_Click"/>
+                <Button x:Name="EditButton" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
+            Content="Редагувати" Width="120" IsEnabled="False" Height="45" materialDesign:ButtonAssist.CornerRadius="15" Margin="10 0 0 0" FontSize="16"/>
+            </StackPanel>
+
+
+        </Grid>
+    </materialDesign:Card>
 </Window>

@@ -8,48 +8,40 @@
         xmlns:models="clr-namespace:LAB4OOP.Models"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Height="515" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Height="605" Width="405" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
     <materialDesign:Card UniformCornerRadius="15" Background="Transparent">
         <materialDesign:Card.Resources>
             <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="15" />
-            <Setter Property="Padding" Value="10" />
-            <Setter Property="Margin" Value="1" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="#888" BlurRadius="8" ShadowDepth="2" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="0,5,0,2" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="#333" />
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="1" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#888" BlurRadius="8" ShadowDepth="2" />
+                    </Setter.Value>
+                </Setter>
             </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="140"/>
-                <Setter Property="Background" Value="White"/>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="10,4,0,3" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Width" Value="140"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Height" Value="25"/>
             </Style>
             
-     
-        <ObjectDataProvider x:Key="ServiceTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}" >
+            <ObjectDataProvider x:Key="ServiceTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}" >
               <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="models:EducationLevel" />
               </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-    </materialDesign:Card.Resources>
+            </ObjectDataProvider>
+            
+        </materialDesign:Card.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" >
         <Border Style="{StaticResource CardStyle}" MouseDown="Border_MouseDown">
@@ -67,41 +59,76 @@
                             <Setter Property="Height" Value="28"/>
                             <Setter Property="CornerRadius" Value="15"/>
                             <Setter Property="HorizontalAlignment" Value="Left"/>
-                            <Setter Property="Margin" Value="0 10 0 0"/>
+                            <Setter Property="Margin" Value="4 10 0 0"/>
                         </Style>
                     </Grid.Resources>
                     <StackPanel>
-                        <TextBlock Text="Створення / Редагування " FontSize="20" FontWeight="Bold" Margin="0,0,0,15" />
-                        <TextBlock Text="Ім'я Студента:" />
-                        <Border>
-                            <TextBox x:Name="FirstNameBox"  />
-                        </Border>
-                        <TextBlock Text="Прізвище Студента:" />
-                        <Border>
-                            <TextBox x:Name="LastNameBox"  />
-                        </Border>
-                        <TextBlock Text="Дата народження:" />
-                        <Border>
-                            <DatePicker x:Name="BirthDatePicker" Margin="0,0,0,10" BorderThickness="0" Height="25" Width="140"/>
-                        </Border>
-                        <TextBlock Text="Освітній рівень:" />
-                        <Border>
-                            <ComboBox x:Name="ServiceCombo" ItemsSource="{Binding Source={StaticResource ServiceTypes}}" />
-                        </Border>
-                        <TextBlock Text="Іспит:" />
-                        <ComboBox x:Name="ExamComboBox" DisplayMemberPath="Name" SelectionChanged="ExamComboBox_SelectionChanged" />
+                        <TextBlock Text="Створення / Редагування " FontSize="20" FontWeight="Bold" Foreground="Black"/>
+                        <StackPanel Orientation="Horizontal" Width="50" Margin="340 -40 0 0">
+                            <StackPanel Width="50" Height="50" HorizontalAlignment="Right">
+                                <Button  Margin="10 7 10 0" Height="30" Width="30" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Close" Background="{x:Null}" 
+                                         x:Name="ButtonExit" Click="ButtonExit_Click"  BorderBrush="Black">
+                                    <materialDesign:PackIcon Kind="Close" Foreground="Black" Height="20" Width="20"/>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                        <Border Width="170" Height="470" Margin="7 0 0 0" >
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0.1" EndPoint="0.9,1">
+                                    <GradientStop Color="#000066" Offset="0" />
+                                    <GradientStop Color="#ff99cc" Offset="0.8" />
+                                    
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel>
+                                <TextBlock Text="Ім'я Студента:" />
+                                <Border >
+                                    
+                                    <TextBox x:Name="FirstNameBox"/>
+                                </Border>
+                                <TextBlock Text="Прізвище Студента:" />
+                                <Border >
+                                    <TextBox x:Name="LastNameBox"  />
+                                </Border>
+                                <TextBlock Text="Дата народження:" />
+                                <Border>
+                                    <DatePicker x:Name="BirthDatePicker"  BorderThickness="0" Height="30" Width="140" FontSize="16"/>
+                                </Border>
+                                <TextBlock Text="Освітній рівень:" />
+                                <Border>
+                                    <ComboBox x:Name="ServiceCombo" ItemsSource="{Binding Source={StaticResource ServiceTypes}}" BorderThickness="0" BorderBrush="{x:Null}" Width="140"
+                                               MaxDropDownHeight="200">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" Foreground="Black" FontSize="16"/>
+                                                
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Border>
+                                <TextBlock Text="Іспит:" />
+                                <Border>
+                                    <ComboBox x:Name="ExamComboBox" DisplayMemberPath="Name" SelectionChanged="ExamComboBox_SelectionChanged" BorderThickness="0" BorderBrush="{x:Null}" Width="140" 
+                                               MaxDropDownHeight="150" FontSize="16" />
 
-                        <TextBlock Text="Оцінка:" />
-                        <TextBox x:Name="CostBox"  />
-
-                        <TextBlock Text="Середній бал:" />
-                        <TextBox x:Name="SeredBox"  />
-
+                                </Border>
+                                <TextBlock Text="Оцінка:" />
+                                <Border>
+                                    <TextBox x:Name="CostBox" />
+                                </Border>
+                                <TextBlock Text="Середній бал:" />
+                                <Border>
+                                    <TextBox x:Name="SeredBox" />
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        
+                        
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                            <Button Content="Зберегти" Width="100"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
-                Height="25" Margin="0 0 15 0" Click="Save_Click"/>
-                            <Button Content="Скасувати" Width="100"  Background="#f44336" BorderBrush="#f44336" Foreground="Black" Style="{StaticResource MaterialDesignFlatButton}"
-                Height="25" Click="Cancel_Click" />
+                            <Button Content="Зберегти" Width="110"  Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
+                                    Height="30" Margin="0 0 15 0" Click="Save_Click" FontSize="16" materialDesign:ButtonAssist.CornerRadius="15"/>
+                            <Button Content="Скасувати" Width="110"  Background="#f44336" BorderBrush="#f44336" Foreground="Black" Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="30" Click="Cancel_Click" FontSize="16" materialDesign:ButtonAssist.CornerRadius="15"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

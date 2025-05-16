@@ -32,7 +32,21 @@ namespace LAB4OOP.Views
             _examService = examService;
             
 
-        }        
+        }
+        private void Border_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                try
+                {
+                    DragMove();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Помилка: " + ex.Message);
+                }
+            }
+        }
         private void ButtonExit_Click(object sender, RoutedEventArgs e) => DialogResult = false;
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {

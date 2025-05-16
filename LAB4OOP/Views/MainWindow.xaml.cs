@@ -38,6 +38,10 @@ namespace LAB4OOP.Views
             var students = _studentService.GetAllStudents();          
             OrdersGrid.ItemsSource = students;
         }
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private void Border_MouseDown(object sender, MouseEventArgs e)
         {
@@ -69,5 +73,7 @@ namespace LAB4OOP.Views
                 }
             }
         }
+
+      
     }
 }
