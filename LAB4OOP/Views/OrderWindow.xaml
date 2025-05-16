@@ -92,7 +92,7 @@
                                 </Border>
                                 <TextBlock Text="Дата народження:" />
                                 <Border>
-                                    <DatePicker x:Name="BirthDatePicker"  BorderThickness="0" Height="30" Width="140" FontSize="16"/>
+                                    <DatePicker x:Name="BirthDatePicker"  BorderThickness="0" Height="30" Width="140" FontSize="16" DisplayDateEnd="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short"/>
                                 </Border>
                                 <TextBlock Text="Освітній рівень:" />
                                 <Border>
@@ -134,11 +134,11 @@
                                 </StackPanel>
                                 <TextBlock Text="Оцінка:" />
                                 <Border>
-                                    <TextBox x:Name="CostBox" />
+                                    <TextBox x:Name="CostBox"  PreviewTextInput="NumberOnly_PreviewTextInput"/>
                                 </Border>
                                 <TextBlock Text="Середній бал:" />
                                 <Border>
-                                    <TextBox x:Name="SeredBox" />
+                                    <TextBox x:Name="SeredBox" PreviewTextInput="NumberOnly_PreviewTextInput"/>
                                 </Border>
                             </StackPanel>
                         </Border>

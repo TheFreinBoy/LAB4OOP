@@ -29,18 +29,7 @@ namespace LAB4OOP.Models
         }
 
         public double AverageScore { get; set; }
-
-
-        public override string ToString()
-        {
-            return $"{person.FullName}, {educationLevel}, {exams.Count} екзаменів, Середній бал: {AverageScore:F2}";
-        }
-
-        public string ToStringShort()
-        {
-            return $"{person.LastName} — {AverageScore:F2}";
-        }
-
+  
         public string FullName => person.FullName;
         public string ExamName => exams.LastOrDefault().Name;
         public double ExamScore => exams.LastOrDefault().Score;

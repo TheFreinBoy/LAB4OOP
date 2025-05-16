@@ -33,6 +33,7 @@ namespace LAB4OOP.Views
             InitializeComponent();
             _examService = examService;
             _studentBeingEdited = studentToEdit;
+            BirthDatePicker.DisplayDateEnd = DateTime.Today.AddYears(-17);
 
             LoadExistingExams();
             if (studentToEdit != null)
@@ -47,8 +48,7 @@ namespace LAB4OOP.Views
                 SeredBox.Text = studentToEdit.AverageScore.ToString();
             }
 
-        }
-        
+        }      
 
         private void LoadExistingExams()
         {          
@@ -76,17 +76,23 @@ namespace LAB4OOP.Views
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (!double.TryParse(CostBox.Text, out double Score) || !double.TryParse(SeredBox.Text, out double avg))
-            {
-                MessageBox.Show("Введіть правильні числа для оцінки і середнього балу.");
-                return;
-            }
-
-            if (BirthDatePicker.SelectedDate == null || ServiceCombo.SelectedItem == null)
+            if (BirthDatePicker.SelectedDate == null || ServiceCombo.SelectedItem == null || string.IsNullOrEmpty(FirstNameBox.Text) || string.IsNullOrEmpty(LastNameBox.Text) || string.IsNullOrEmpty(ServiceCombo.Text)
+                || string.IsNullOrEmpty(ExamComboBox.Text) || string.IsNullOrEmpty(CostBox.Text) || string.IsNullOrEmpty(SeredBox.Text))
             {
                 MessageBox.Show("Заповніть усі поля.");
                 return;
             }
+            if (!IsValidName(FirstNameBox.Text) || !IsValidName(LastNameBox.Text))
+            {
+                MessageBox.Show("Ім’я та прізвище повинні містити лише літери та бути не менше 3 символів.");
+                return;
+            }
+            if (!double.TryParse(CostBox.Text, out double Score) || !double.TryParse(SeredBox.Text, out double avg)|| Score <= 5 || avg <=5.0)
+            {
+                MessageBox.Show("Введіть правильні числа для оцінки і середнього балу.");
+                return;
+            }
+            
             var selectedExam = ExamComboBox.SelectedItem as Exam;
             var person = new Person(FirstNameBox.Text, LastNameBox.Text, BirthDatePicker.SelectedDate.Value);
             var level = (EducationLevel)ServiceCombo.SelectedItem;
@@ -147,8 +153,14 @@ namespace LAB4OOP.Views
                 }
             }
         }
-
-
-
+        private void NumberOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !double.TryParse(((TextBox)sender).Text + e.Text, out _);
+        }
+        private bool IsValidName(string name)
+        {
+            return name.All(char.IsLetter) && name.Length >= 3;
+        }
+        
     }
 }

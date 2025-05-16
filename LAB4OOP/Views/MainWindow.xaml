@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1100" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}">
+        Title="MainWindow" Height="630" Width="1100" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}">
     
     <materialDesign:Card MouseDown="Border_MouseDown" UniformCornerRadius="15" >
         <Grid>
@@ -17,13 +17,10 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="0.93*"/>
                 <RowDefinition Height="6.5*" />
                 <RowDefinition Height="1.1*" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <TextBlock  Text="Студенти" FontSize="28" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center" Margin="0,20,0,20" />
-            </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 20">
                 <StackPanel Width="60" Height="50">
                     <Button  Margin="10 7 10 0" Height="40" Width="40" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Close" Background="{x:Null}" 
@@ -80,8 +77,10 @@
             </Border>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15,10">
-                <Button x:Name="AddButton" Content="Додати" Width="120" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa"
-            Height="45" materialDesign:ButtonAssist.CornerRadius="15" Foreground="Black" FontSize="16" Click="Add_Click"/>
+                <Button x:Name="AddButton" Width="60" Style="{StaticResource MaterialDesignFloatingActionButton}" Background="#00ffaa" BorderBrush="#00ffaa"
+            Height="60"  Foreground="Black" FontSize="16" Click="Add_Click">
+                    <materialDesign:PackIcon Kind="Add"  Height="35" Width="35"/>
+                </Button>
                 
             </StackPanel>
 

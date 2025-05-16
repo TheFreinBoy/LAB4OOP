@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
         Height="250" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
@@ -64,7 +65,7 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Дата іспиту"/>
                     <Border>
-                        <DatePicker Focusable="False" x:Name="DateExamDatePicker" BorderThickness="0" Width="140" FontSize="18"/>
+                        <DatePicker Focusable="False" x:Name="DateExamDatePicker" BorderThickness="0" Width="140" FontSize="18" DisplayDateEnd="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short"/>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
