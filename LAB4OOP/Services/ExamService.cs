@@ -25,7 +25,6 @@ namespace LAB4OOP.Services
                 cmd.CommandText = "INSERT INTO Exams (Name, Date) VALUES (@name, @date); SELECT last_insert_rowid();";
                 cmd.Parameters.AddWithValue("@name", exam.Name);
                 cmd.Parameters.AddWithValue("@date", exam.Date.ToString("yyyy-MM-dd"));
-                cmd.ExecuteNonQuery();
                 exam.Id = Convert.ToInt32(cmd.ExecuteScalar());
             }
         }

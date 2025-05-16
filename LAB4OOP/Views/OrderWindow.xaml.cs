@@ -23,32 +23,38 @@ namespace LAB4OOP.Views
     public partial class OrderWindow : Window
     {
         public Student CreatedStudent { get; private set; }   
-
         private List<Exam> _exams = new List<Exam>();
-
         private readonly ExamService _examService;
+        private Student _studentBeingEdited;
+        private Student _editingStudent;
 
-        private Exam _addExamPlaceholder = new Exam { Name = "➕ Додати іспит" };
-
-        public OrderWindow(ExamService examService)
+        public OrderWindow(ExamService examService, Student studentToEdit = null) 
         {
             InitializeComponent();
             _examService = examService;
-            
+            _studentBeingEdited = studentToEdit;
 
-            _exams = new List<Exam> { _addExamPlaceholder };
-            ExamComboBox.ItemsSource = _exams;
             LoadExistingExams();
-            
+            if (studentToEdit != null)
+            {
+                _editingStudent = studentToEdit;
+                FirstNameBox.Text = studentToEdit.Person.FirstName;
+                LastNameBox.Text = studentToEdit.Person.LastName;
+                BirthDatePicker.SelectedDate = studentToEdit.Person.BirthDate;
+                ServiceCombo.SelectedItem = studentToEdit.EducationLevel;
+                ExamComboBox.SelectedValue = studentToEdit.ExamId;
+                CostBox.Text = studentToEdit.Score.ToString();
+                SeredBox.Text = studentToEdit.AverageScore.ToString();
+            }
+
         }
         
 
         private void LoadExistingExams()
         {          
             _exams = _examService.GetAllExams();
-            _exams.Add(_addExamPlaceholder);
             ExamComboBox.ItemsSource = _exams;
-            ExamComboBox.DisplayMemberPath = "Name"; 
+             
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
@@ -85,36 +91,64 @@ namespace LAB4OOP.Views
             var person = new Person(FirstNameBox.Text, LastNameBox.Text, BirthDatePicker.SelectedDate.Value);
             var level = (EducationLevel)ServiceCombo.SelectedItem;
             var student = new Student(person, level);
-            student.Score = Score;
-            student.AverageScore = avg;
-            student.ExamId = selectedExam.Id;
+            {
+                student.Score = Score;
+                student.AverageScore = avg;
+                student.ExamId = selectedExam.Id;
+            }
+            if (_editingStudent != null)
+            {
+                student.Id = _editingStudent.Id;
+            }
 
             CreatedStudent = student;
             
             this.DialogResult = true;
             this.Close();
         }
-        private void ExamComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var selected = ExamComboBox.SelectedItem as Exam;
-            if (selected == null) return;
-
-            if (selected == _addExamPlaceholder)
+            var createWindow = new CreateExamWindow(_examService);
+            if (createWindow.ShowDialog() == true)
             {
-                var createWindow = new CreateExamWindow(_examService);               
-                if (createWindow.ShowDialog() == true)
-                {
-                    
-                    var newExam = createWindow.CreatedExam;
-                    _exams.Insert(_exams.Count - 1, newExam); 
-                    ExamComboBox.ItemsSource = null;
-                    ExamComboBox.ItemsSource = _exams;                  
-                }
+                var newExam = createWindow.CreatedExam;
 
-                ExamComboBox.SelectedIndex = -1;
+                _exams.Add(newExam);
+                ExamComboBox.ItemsSource = null;
+                ExamComboBox.ItemsSource = _exams;
+
+                ExamComboBox.SelectedItem = newExam;
             }
-            
         }
+        private void EditExam_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is Exam examToEdit)
+            {
+                var editWindow = new CreateExamWindow(_examService, examToEdit);
+                if (editWindow.ShowDialog() == true)
+                {
+                    LoadExistingExams();
+                    ExamComboBox.SelectedItem = _exams.FirstOrDefault(x => x.Id == examToEdit.Id);
+                }
+            }
+        }
+
+        private void DeleteExam_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is Exam examToDelete)
+            {
+                var result = MessageBox.Show($"Ви впевнені, що хочете видалити іспит '{examToDelete.Name}'?",
+                                             "Підтвердження", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _examService.DeleteExam(examToDelete.Id);
+                    LoadExistingExams();
+                    ExamComboBox.SelectedIndex = -1;
+                }
+            }
+        }
+
+
 
     }
 }

@@ -107,11 +107,31 @@
                                     </ComboBox>
                                 </Border>
                                 <TextBlock Text="Іспит:" />
-                                <Border>
-                                    <ComboBox x:Name="ExamComboBox" DisplayMemberPath="Name" SelectionChanged="ExamComboBox_SelectionChanged" BorderThickness="0" BorderBrush="{x:Null}" Width="140" 
-                                               MaxDropDownHeight="150" FontSize="16" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Border>
+                                        <ComboBox x:Name="ExamComboBox" BorderThickness="0" BorderBrush="{x:Null}" Width="140" 
+                                               MaxDropDownHeight="150" FontSize="16">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
+                                                        <Button Style="{StaticResource gridEditButton}" Margin="120,0,0,0" Click="EditExam_Click">
+                                                            <materialDesign:PackIcon Kind="PencilOffOutline" Style="{StaticResource gridButtonIcon}"/>
+                                                        </Button>
+                                                        <Button Style="{StaticResource gridRemoveButton}" Margin="5,0,0,0" Click="DeleteExam_Click">
+                                                            <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
 
-                                </Border>
+                                        </ComboBox>
+
+                                    </Border>
+                                    <Button Style="{StaticResource gridAddButton}" Margin="-195,-55,0,0" Click="AddButton_Click" Width="25" Height="25">
+                                        <materialDesign:PackIcon Kind="Add" Style="{StaticResource gridButtonIcon}" HorizontalAlignment="Right"/>
+                                    </Button>
+                                </StackPanel>
                                 <TextBlock Text="Оцінка:" />
                                 <Border>
                                     <TextBox x:Name="CostBox" />

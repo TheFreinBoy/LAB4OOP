@@ -64,10 +64,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}">
+                                        <Button Style="{StaticResource gridEditButton}" Click="EditStudent_Click">
                                             <materialDesign:PackIcon Kind="PencilOffOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
-                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Click="DeleteStudent_Click">
                                             <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
                                     </StackPanel>
@@ -82,10 +82,8 @@
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15,10">
                 <Button x:Name="AddButton" Content="Додати" Width="120" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa"
             Height="45" materialDesign:ButtonAssist.CornerRadius="15" Foreground="Black" FontSize="16" Click="Add_Click"/>
-                <Button x:Name="EditButton" Style="{StaticResource MaterialDesignFlatButton}" Background="#00ffaa" BorderBrush="#00ffaa" Foreground="Black"
-            Content="Редагувати" Width="120" IsEnabled="False" Height="45" materialDesign:ButtonAssist.CornerRadius="15" Margin="10 0 0 0" FontSize="16"/>
+                
             </StackPanel>
-
 
         </Grid>
     </materialDesign:Card>

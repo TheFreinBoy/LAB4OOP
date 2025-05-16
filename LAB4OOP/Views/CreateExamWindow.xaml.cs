@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace LAB4OOP.Views
 {
@@ -22,16 +23,27 @@ namespace LAB4OOP.Views
     public partial class CreateExamWindow : Window
     {
         public Exam CreatedExam { get; private set; }
+        private Exam _examBeingEdited;
 
 
         private readonly ExamService _examService;
 
-        public CreateExamWindow( ExamService examService)
+        public CreateExamWindow(ExamService examService, Exam examToEdit = null)
         {
-            InitializeComponent();          
+            InitializeComponent();
             _examService = examService;
-            
+            _examBeingEdited = examToEdit;
 
+            if (_examBeingEdited != null)
+            {
+                NameExamTextBox.Text = _examBeingEdited.Name;
+                DateExamDatePicker.SelectedDate = _examBeingEdited.Date;
+                Title = "Редагування іспиту";
+            }
+            else
+            {
+                Title = "Створення іспиту";
+            }
         }
         private void Border_MouseDown(object sender, MouseEventArgs e)
         {
@@ -55,12 +67,21 @@ namespace LAB4OOP.Views
                 MessageBox.Show("Заповніть всі поля правильно.");
                 return;
             }
-
-            var newExam = new Exam(NameExamTextBox.Text, DateExamDatePicker.SelectedDate.Value);                       
-            _examService.AddExam(newExam);
             
-
-            CreatedExam = newExam;
+            if (_examBeingEdited != null)
+            {
+                _examBeingEdited.Name = NameExamTextBox.Text;
+                _examBeingEdited.Date = DateExamDatePicker.SelectedDate.Value;
+                _examService.UpdateExam(_examBeingEdited);
+                CreatedExam = _examBeingEdited;
+            }
+            else
+            {
+                
+                var newExam = new Exam(NameExamTextBox.Text, DateExamDatePicker.SelectedDate.Value);
+                _examService.AddExam(newExam);
+                CreatedExam = newExam;
+            }
             this.DialogResult = true;
             this.Close();
         }

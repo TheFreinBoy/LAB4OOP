@@ -155,6 +155,27 @@
             </Style>
 
             <!--Buttons Styles-->
+            <Style x:Key="gridAddButton" TargetType="Button">
+                <Setter Property="Background" Value="#1d9e00" />
+                <Setter Property="BorderBrush" Value="#1b9400" />
+                <Setter Property="Foreground" Value="#ffffff" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="5">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#21b300" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <Style x:Key="gridEditButton" TargetType="Button">
                 <Setter Property="Background" Value="#512DA8" />
                 <Setter Property="BorderBrush" Value="#4A148C" />
