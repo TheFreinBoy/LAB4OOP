@@ -77,6 +77,11 @@ namespace LAB4OOP.Views
         {
             Application.Current.Shutdown();
         }
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
 
         private void Border_MouseDown(object sender, MouseEventArgs e)
         {

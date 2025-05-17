@@ -7,14 +7,14 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Height="250" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Height="250" Width="590" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid Mouse.MouseMove="Border_MouseDown">
         <Border CornerRadius="15">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF6EFFE8"/>
-                    <GradientStop Color="#FFFFB68B" Offset="1"/>
-                    <GradientStop Color="#FF7E72FF" Offset="0.487"/>
+                    <GradientStop Color="#FFF9FFFE"/>
+                    <GradientStop Color="#FFFFDCC8" Offset="1"/>
+                    <GradientStop Color="#FFC1BBFF" Offset="0.487"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
@@ -46,11 +46,11 @@
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
-                <Border Width="550" Grid.ColumnSpan="3" Height="160" CornerRadius="85" Margin="0 0 25 0">
+                <Border Width="575" Grid.ColumnSpan="3" Height="160" CornerRadius="85" Margin="0 0 0 0">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0.9,0.1" EndPoint="0.9,1">
-                            <GradientStop Color="#000066" Offset="0" />
-                            <GradientStop Color="#ff99cc" Offset="1" />
+                            <GradientStop Color="#FF5AE4FF" Offset="0" />
+                            <GradientStop Color="Black" Offset="1" />
 
                         </LinearGradientBrush>
                     </Border.Background>

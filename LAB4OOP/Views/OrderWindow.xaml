@@ -8,19 +8,13 @@
         xmlns:models="clr-namespace:LAB4OOP.Models"
         xmlns:local="clr-namespace:LAB4OOP.Views"
         mc:Ignorable="d"
-        Height="605" Width="405" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Height="580" Width="405" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
     <materialDesign:Card UniformCornerRadius="15" Background="Transparent">
         <materialDesign:Card.Resources>
             <Style x:Key="CardStyle" TargetType="Border">
                 <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="Padding" Value="10" />
-                <Setter Property="Margin" Value="1" />
-                <Setter Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect Color="#888" BlurRadius="8" ShadowDepth="2" />
-                    </Setter.Value>
-                </Setter>
             </Style>
             <Style TargetType="TextBlock">
                 <Setter Property="Margin" Value="10,4,0,3" />
@@ -47,8 +41,8 @@
         <Border Style="{StaticResource CardStyle}" MouseDown="Border_MouseDown">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="0.9,1">
-                    <GradientStop Color="#c7ffed" Offset="0" />
-                    <GradientStop Color="#c7e8ff" Offset="1" />
+                    <GradientStop Color="#d6fffe" Offset="0" />
+                    <GradientStop Color="#3b807d" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
                 <Grid>
