@@ -28,8 +28,18 @@ namespace LAB4OOP.Services
                 exam.Id = Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+        public bool IsExamExists(string column, string value)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
 
-
+                connection.Open();
+                var query = $"SELECT COUNT(*) FROM Exams WHERE {column} = @Value";
+                var cmd = new SQLiteCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Value", value);
+                return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+            }
+        }
 
         public List<Exam> GetAllExams()
         {

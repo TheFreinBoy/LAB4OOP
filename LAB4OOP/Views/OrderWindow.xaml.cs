@@ -87,7 +87,7 @@ namespace LAB4OOP.Views
                 MessageBox.Show("Ім’я та прізвище повинні містити лише літери та бути не менше 3 символів.");
                 return;
             }
-            if (!double.TryParse(CostBox.Text, out double Score) || !double.TryParse(SeredBox.Text, out double avg) )
+            if (!int.TryParse(CostBox.Text, out int Score) || !double.TryParse(SeredBox.Text, out double avg) || Score > 100 || avg > 100)
             {
                 MessageBox.Show("Введіть правильні числа для оцінки і середнього балу.");             
                 return;

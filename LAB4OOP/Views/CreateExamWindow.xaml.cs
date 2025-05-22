@@ -67,23 +67,31 @@ namespace LAB4OOP.Views
                 MessageBox.Show("Заповніть всі поля правильно.");
                 return;
             }
-            
-            if (_examBeingEdited != null)
+            bool isExist = _examService.IsExamExists("Name",NameExamTextBox.Text);
+            if (isExist)
             {
-                _examBeingEdited.Name = NameExamTextBox.Text;
-                _examBeingEdited.Date = DateExamDatePicker.SelectedDate.Value;
-                _examService.UpdateExam(_examBeingEdited);
-                CreatedExam = _examBeingEdited;
+                MessageBox.Show("Такий екзамен вже існує");
             }
             else
-            {
-                
-                var newExam = new Exam(NameExamTextBox.Text, DateExamDatePicker.SelectedDate.Value);
-                _examService.AddExam(newExam);
-                CreatedExam = newExam;
+            {              
+                if (_examBeingEdited != null)
+                {
+                    _examBeingEdited.Name = NameExamTextBox.Text;
+                    _examBeingEdited.Date = DateExamDatePicker.SelectedDate.Value;
+                    _examService.UpdateExam(_examBeingEdited);
+                    CreatedExam = _examBeingEdited;
+                }
+                else
+                {
+
+                    var newExam = new Exam(NameExamTextBox.Text, DateExamDatePicker.SelectedDate.Value);
+                    _examService.AddExam(newExam);
+                    CreatedExam = newExam;
+                }
+                this.DialogResult = true;
+                this.Close();
             }
-            this.DialogResult = true;
-            this.Close();
+            
         }
 
     }
